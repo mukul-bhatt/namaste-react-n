@@ -1,8 +1,7 @@
-        
-        
+        import React from "react";
+        import ReactDOM from 'react-dom/client';
+
         const element = React.createElement("h1", {id: "heading"}, "Hello World from React 🙏🏼"); 
-        // This element which is created via React.createElement is a Javascript Object.
-        // It is React that converts it into a html element on our page.
 
         const parent = React.createElement("div", { id: "parent" }, [
             React.createElement("div", { id: "child" }, [
