@@ -4,7 +4,7 @@
   "description": "This is namaste react",
   "source": "index.html",
   "scripts": {
-    "start": "parcel --open safari",
+    "start": "parcel --open chrome",
     "build": "parcel build"
   },
   "repository": {
