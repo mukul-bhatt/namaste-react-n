@@ -29,9 +29,12 @@
 .nav-items > ul > li{
     font-weight: 500;
     font-family: 'Courier New', Courier, monospace;
+    
 }
 
-
+.nav-login-button-container{
+    width: 10%;
+}
 /* nav-section ends here */
 
 /* body-section starts here */
@@ -41,13 +44,9 @@
     flex-direction: column;
     margin: 20px 0px;
     padding: 10 40px;
-    /* border: 1px solid black; */
     gap: 20px;
 }
 
-.main-search-bar{
-    border: 1px solid black;
-}
 .main-restaurant-card{
     /* border: 1px dotted red; */
     width: 300px;
@@ -82,7 +81,26 @@
     gap:35px;
 }
 
+/* first-section styling */
 
+.main-first-section{
+  display: flex;
+  gap: 10%;
+  align-items: center;
+}
+
+.main-search-bar{
+  display: flex;
+  gap: 10px;
+  width: 50%;
+}
+
+.search-input{
+  width: 100%;
+  padding: 5px 32px;
+    box-sizing: border-box;
+    border-radius: 17px;
+}
 /* Button styling */
 
 .button-85 {
@@ -151,4 +169,40 @@
   top: 0;
   border-radius: 10px;
 }
+
+
+/* Shimmer styling */
+
+.shimmer-container{
+  width: 270px;
+  margin: 20px;
+}
+
+.shimmer-card{
+  background-color: #e7e7e5d9;
+  border-radius: 12px 12px;
+  width: 270px;
+  height: 180px;
+}
+
+.shimmer-heading{
+  background-color: #e7e7e5d9;
+  height: 12px;
+  margin: 14px 4px;
+  width: 90%;
+  border-radius: 1px 1px;
+}
+
+.shimmer-heading-2{
+  width: 80%;
+}
+
+.main-shimmer-container{
+  margin: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+
 /* body-section ends here */
