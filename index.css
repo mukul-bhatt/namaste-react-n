@@ -3,6 +3,9 @@
     padding: 0;
 }
 
+.dark{
+  background-color:#222;
+}
 
 /* nav-section starts here */
 
@@ -34,6 +37,8 @@
 
 .nav-login-button-container{
     width: 10%;
+    display: flex;
+    gap: 10px;
 }
 /* nav-section ends here */
 
@@ -45,6 +50,7 @@
     margin: 20px 0px;
     padding: 10 40px;
     gap: 20px;
+    
 }
 
 .main-restaurant-card{

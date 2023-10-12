@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -8,15 +8,28 @@ import Error from "./components/Error";
 import Footer from "./components/Footer";
 import Contact from "./components/Contact";
 import Menu from "./components/RestaurantMenu";
+import useOnlineStatus from "./utils/useOnlineStatus";
+import Shimmer from "./components/Shimmer";
+//Dynamic import/ lazy loading/ on demand loading
+const Grocery = lazy(() => import("./components/Grocery"));
 
-const AppLayout = () => (
-  <div className="app">
-    <Header></Header>
-    <Outlet />
-    <Footer></Footer>
-  </div>
-);
+const AppLayout = () => {
+  const networkStatus = useOnlineStatus();
 
+  if (!networkStatus) {
+    return (
+      <h2>Looks like you are offline. Please Check your internet connection</h2>
+    );
+  } else {
+    return (
+      <div className="app">
+        <Header></Header>
+        <Outlet />
+        <Footer></Footer>
+      </div>
+    );
+  }
+};
 const appRouter = createBrowserRouter([
   {
     path: "/",
@@ -37,8 +50,16 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/menu/:resId",
-        element: <Menu />
-      }
+        element: <Menu />,
+      },
+      {
+        path: "/grocery",
+        element: (
+          <Suspense fallback={<Shimmer />}>
+            <Grocery />
+          </Suspense>
+        ),
+      },
     ],
   },
 ]);
