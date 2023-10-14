@@ -341,4 +341,12 @@ margin-bottom: 30px;
   object-fit: cover;
   border-radius: 2px 2px;
 }
+
+.plus-button{
+  cursor: pointer;
+}
+
+.minus-button{
+  cursor: pointer;
+}
 /* MenuCategory component ends here */

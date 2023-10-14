@@ -1,18 +1,19 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import companyLogo from "../../app-logo.png";
+import CartContext from "../utils/CartContext";
 import ThemeContext from "../utils/ThemeContext";
 import useOnlineStatus from "../utils/useOnlineStatus";
-import UserContext from "../utils/UserContext";
+
 
 
 const Header = () => {
   const [btnName, setbtnName] = useState("Login");
 
   const [newTheme, setNewTheme] = useContext(ThemeContext);
+  const [cartValue] = useContext(CartContext);
 
   const status = useOnlineStatus();
-  const {user} = useContext(UserContext);
   
   return (
     <div className="navbar">
@@ -33,7 +34,6 @@ const Header = () => {
 
           <li>
             <Link to="/about">About Us</Link>
-            {/* <a href="/about">ABout us</a> */}
           </li>
 
           <li>
@@ -48,7 +48,7 @@ const Header = () => {
             <Link to="/grocery">Grocery</Link>
           </li>
           <li>
-            {user.name}
+              Cart-{cartValue}
           </li>
         </ul>
       </div>

@@ -4,7 +4,7 @@ import { useState, useEffect, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { RestaurantCardWithOffers } from "./RestaurantCard";
-import UserContext from "../utils/UserContext";
+
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurant] = useState([]);
@@ -13,7 +13,6 @@ const Body = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const PromotedRestaurantCard = RestaurantCardWithOffers(RestaurantCard);
 
-  const { user, setNewUser } = useContext(UserContext);
 
   
 
@@ -61,18 +60,6 @@ const Body = () => {
           </button>
         </div>
 
-        <input
-          type="text"
-          value={user.name}
-          onChange={(e) =>
-            setNewUser({
-              user: {
-                name: e.target.value,
-                email: "nhi krunga",
-              },
-            })
-          }
-        />
 
         {/* Search component */}
         <div className="main-search-bar">

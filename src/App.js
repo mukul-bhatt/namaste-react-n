@@ -13,19 +13,14 @@ import Shimmer from "./components/Shimmer";
 import Instamart from "./components/Instamart";
 //Dynamic import/ lazy loading/ on demand loading
 const Grocery = lazy(() => import("./components/Grocery"));
-import UserContext from "./utils/UserContext";
 import ThemeContext from "./utils/ThemeContext";
+import CartContext from "./utils/CartContext";
 
 const AppLayout = () => {
-  const [newUser, setNewUser] = useState({
-    user: {
-      name: "mike",
-      email: "helloworld@gamil.com",
-    },
-  });
+ 
 
   const [newTheme, setNewTheme] = useState("Dark");
-
+  const [cartValue, setCartValue] = useState(0);
 
 
   // Code for whether user has a network connection or not
@@ -37,28 +32,15 @@ const AppLayout = () => {
   } else {
     return (
       <ThemeContext.Provider value={[newTheme, setNewTheme]}>
-        <UserContext.Provider
-          value={{
-            user: newUser.user,
-            setNewUser,
-          }}
-        >
-          <div className="app">
-            <UserContext.Provider
-              value={{
-                user: {
-                  name: "mangal pandey",
-                },
-              }}
-            >
-              <Header></Header>
-            </UserContext.Provider>
+
+        <CartContext.Provider value={[cartValue, setCartValue]}>
+            <Header></Header>
 
             <Outlet />
 
             <Footer></Footer>
-          </div>
-        </UserContext.Provider>
+
+            </CartContext.Provider>
       </ThemeContext.Provider>
     );
   }

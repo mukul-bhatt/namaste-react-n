@@ -1,7 +1,4 @@
 import { CDN_URL } from "../utils/constants";
-import UserContext from "../utils/UserContext";
-import { useContext } from "react";
-import ThemeContext from "../utils/ThemeContext";
 
 const printCuisines = (cuisines) => {
   const str = cuisines.join(", ");
@@ -13,10 +10,6 @@ const printCuisines = (cuisines) => {
 };
 
 export const RestaurantCard = (props) => {
-  const users = useContext(UserContext);
-  const theme = useContext(ThemeContext);
-
-  const { name: myName, email } = users.user;
   const { name, avgRating, cuisines, cloudinaryImageId, costForTwo } = props.resData;
 
   return (
@@ -28,9 +21,7 @@ export const RestaurantCard = (props) => {
         <p>{avgRating} ⭐️</p>
         <p>{printCuisines(cuisines)}</p>
         <p>{costForTwo}</p>
-        <p>{myName}</p>
-        <p>{email}</p>
-        <p>{theme}</p>
+
       </div>
     </div>
   );
