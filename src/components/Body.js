@@ -1,24 +1,37 @@
 import RestaurantCard from "./RestaurantCard";
 import { DATA_URL } from "../utils/constants";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import { RestaurantCardWithOffers } from "./RestaurantCard";
+import UserContext from "../utils/UserContext";
+import ThemeContext from "../utils/ThemeContext";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurant] = useState([]);
+
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const PromotedRestaurantCard = RestaurantCardWithOffers(RestaurantCard);
+
+  const { user, setNewUser } = useContext(UserContext);
+
 
   async function fetchData() {
     const response = await fetch(DATA_URL);
     const data = await response.json();
-    console.log("fucntion called",data);
+
     setListOfRestaurant(
-      data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || data?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants 
+      data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants ||
+        data?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants
     );
     setFilteredRestaurant(
-      data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants ||
-      data?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants 
+      data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants ||
+        data?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants
     );
   }
 
@@ -47,6 +60,18 @@ const Body = () => {
             <span className="text">Top Rated Restaurants</span>
           </button>
         </div>
+
+        <input
+          type="text"
+          value={user.name}
+          onChange={(e) => setNewUser({
+            user: {
+              name : e.target.value,
+              email: "nhi krunga"
+            }
+          })}
+          
+        />
 
         {/* Search component */}
         <div className="main-search-bar">
@@ -93,8 +118,14 @@ const Body = () => {
       {/* Restaurants component */}
       <div className="main-restaurant-container">
         {filteredRestaurant.map((res) => (
-          <Link to={"menu/"+res.info.id} key={res.info.id}>
-            <RestaurantCard resData={res.info} />
+          <Link className="main-link" to={"menu/" + res.info.id} key={res.info.id}>
+            {res.info?.aggregatedDiscountInfoV3 ? (
+              <PromotedRestaurantCard resData={res.info} />
+            ) : (
+              <ThemeContext.Provider value={"Light Theme"}>
+              <RestaurantCard resData={res.info} />
+              </ThemeContext.Provider>
+            )}
           </Link>
         ))}
       </div>

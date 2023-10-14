@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import companyLogo from "../../app-logo.png";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 
 const Header = () => {
   const [btnName, setbtnName] = useState("Login");
   const [theme, setTheme] = useState("Light");
   const status = useOnlineStatus();
+  const {user} = useContext(UserContext);
 
   return (
     <div className="navbar">
@@ -36,11 +38,14 @@ const Header = () => {
           </li>
 
           <li>
-            <Link to="/cart">Cart</Link>
+            <Link to="/accordion">Accordion</Link>
           </li>
 
           <li>
             <Link to="/grocery">Grocery</Link>
+          </li>
+          <li>
+            {user.name}
           </li>
         </ul>
       </div>
