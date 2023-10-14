@@ -14,6 +14,7 @@ import Instamart from "./components/Instamart";
 //Dynamic import/ lazy loading/ on demand loading
 const Grocery = lazy(() => import("./components/Grocery"));
 import UserContext from "./utils/UserContext";
+import ThemeContext from "./utils/ThemeContext";
 
 const AppLayout = () => {
   const [newUser, setNewUser] = useState({
@@ -23,6 +24,11 @@ const AppLayout = () => {
     },
   });
 
+  const [newTheme, setNewTheme] = useState("Dark");
+
+
+
+  // Code for whether user has a network connection or not
   const networkStatus = useOnlineStatus();
   if (!networkStatus) {
     return (
@@ -30,23 +36,30 @@ const AppLayout = () => {
     );
   } else {
     return (
-      <UserContext.Provider value={{
-        user : newUser.user,
-        setNewUser
-      }}>
-        <div className="app">
-          <UserContext.Provider value={{
-        user: {
-          name : "mangal pandey"
-        }
-      }}>
-            <Header></Header>
-          </UserContext.Provider>
+      <ThemeContext.Provider value={[newTheme, setNewTheme]}>
+        <UserContext.Provider
+          value={{
+            user: newUser.user,
+            setNewUser,
+          }}
+        >
+          <div className="app">
+            <UserContext.Provider
+              value={{
+                user: {
+                  name: "mangal pandey",
+                },
+              }}
+            >
+              <Header></Header>
+            </UserContext.Provider>
 
-          <Outlet />
-          <Footer></Footer>
-        </div>
-      </UserContext.Provider>
+            <Outlet />
+
+            <Footer></Footer>
+          </div>
+        </UserContext.Provider>
+      </ThemeContext.Provider>
     );
   }
 };

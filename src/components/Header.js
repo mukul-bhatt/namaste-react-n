@@ -1,16 +1,19 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import companyLogo from "../../app-logo.png";
+import ThemeContext from "../utils/ThemeContext";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
 
 
 const Header = () => {
   const [btnName, setbtnName] = useState("Login");
-  const [theme, setTheme] = useState("Light");
+
+  const [newTheme, setNewTheme] = useContext(ThemeContext);
+
   const status = useOnlineStatus();
   const {user} = useContext(UserContext);
-
+  
   return (
     <div className="navbar">
       {/* left */}
@@ -67,13 +70,13 @@ const Header = () => {
           className="button-85"
           role="button"
           onClick={() => {
-            setTheme(theme === "Dark" ? "Light" : "Dark");
-            //adding classes for light and dark
+            setNewTheme(newTheme === "Dark" ? "Light" : "Dark");
+            // adding classes for light and dark
             const body = document.querySelector("body");
-            theme === "Dark" ? body.classList.add("dark") : body.classList.remove("dark")
+            newTheme === "Dark" ? body.classList.add("dark") : body.classList.remove("dark")
           }}
         >
-          <span className="text">{theme}</span>
+          <span className="text">{newTheme}</span>
         </button>
       </div>
     

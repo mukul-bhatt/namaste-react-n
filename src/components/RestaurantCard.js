@@ -15,9 +15,9 @@ const printCuisines = (cuisines) => {
 export const RestaurantCard = (props) => {
   const users = useContext(UserContext);
   const theme = useContext(ThemeContext);
+
   const { name: myName, email } = users.user;
-  const { name, avgRating, cuisines, cloudinaryImageId, costForTwo } =
-    props.resData;
+  const { name, avgRating, cuisines, cloudinaryImageId, costForTwo } = props.resData;
 
   return (
     <div className="main-restaurant-card">

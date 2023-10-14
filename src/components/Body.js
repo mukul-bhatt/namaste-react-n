@@ -5,7 +5,6 @@ import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { RestaurantCardWithOffers } from "./RestaurantCard";
 import UserContext from "../utils/UserContext";
-import ThemeContext from "../utils/ThemeContext";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurant] = useState([]);
@@ -16,6 +15,7 @@ const Body = () => {
 
   const { user, setNewUser } = useContext(UserContext);
 
+  
 
   async function fetchData() {
     const response = await fetch(DATA_URL);
@@ -64,13 +64,14 @@ const Body = () => {
         <input
           type="text"
           value={user.name}
-          onChange={(e) => setNewUser({
-            user: {
-              name : e.target.value,
-              email: "nhi krunga"
-            }
-          })}
-          
+          onChange={(e) =>
+            setNewUser({
+              user: {
+                name: e.target.value,
+                email: "nhi krunga",
+              },
+            })
+          }
         />
 
         {/* Search component */}
@@ -118,13 +119,15 @@ const Body = () => {
       {/* Restaurants component */}
       <div className="main-restaurant-container">
         {filteredRestaurant.map((res) => (
-          <Link className="main-link" to={"menu/" + res.info.id} key={res.info.id}>
+          <Link
+            className="main-link"
+            to={"menu/" + res.info.id}
+            key={res.info.id}
+          >
             {res.info?.aggregatedDiscountInfoV3 ? (
               <PromotedRestaurantCard resData={res.info} />
             ) : (
-              <ThemeContext.Provider value={"Light Theme"}>
               <RestaurantCard resData={res.info} />
-              </ThemeContext.Provider>
             )}
           </Link>
         ))}
