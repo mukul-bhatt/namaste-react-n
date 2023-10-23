@@ -15,13 +15,13 @@ import Instamart from "./components/Instamart";
 const Grocery = lazy(() => import("./components/Grocery"));
 import ThemeContext from "./utils/ThemeContext";
 import CartContext from "./utils/CartContext";
+import { Provider } from "react-redux";
+import appStore from "./utils/store";
+import Cart from "./components/Cart";
 
 const AppLayout = () => {
- 
-
   const [newTheme, setNewTheme] = useState("Dark");
   const [cartValue, setCartValue] = useState(0);
-
 
   // Code for whether user has a network connection or not
   const networkStatus = useOnlineStatus();
@@ -31,17 +31,17 @@ const AppLayout = () => {
     );
   } else {
     return (
-      <ThemeContext.Provider value={[newTheme, setNewTheme]}>
-
-        <CartContext.Provider value={[cartValue, setCartValue]}>
+      <Provider store={appStore}>
+        <ThemeContext.Provider value={[newTheme, setNewTheme]}>
+          <CartContext.Provider value={[cartValue, setCartValue]}>
             <Header></Header>
 
             <Outlet />
 
-            <Footer></Footer>
-
-            </CartContext.Provider>
-      </ThemeContext.Provider>
+            {/* <Footer></Footer> */}
+          </CartContext.Provider>
+        </ThemeContext.Provider>
+      </Provider>
     );
   }
 };
@@ -80,6 +80,10 @@ const appRouter = createBrowserRouter([
           </Suspense>
         ),
       },
+      {
+        path: "/cart",
+        element: <Cart />
+      }
     ],
   },
 ]);

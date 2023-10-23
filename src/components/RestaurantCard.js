@@ -1,15 +1,17 @@
 import { CDN_URL } from "../utils/constants";
 
-const printCuisines = (cuisines) => {
-  const str = cuisines.join(", ");
-  if (str.length > 30) {
-    return str.substr(0, 30) + "...";
-  } else {
-    return str;
-  }
-};
 
 export const RestaurantCard = (props) => {
+
+  const printCuisines = (cuisines) => {
+    const str = cuisines.join(", ");
+    if (str.length > 30) {
+      return str.substr(0, 30) + "...";
+    } else {
+      return str;
+    }
+  };
+  
   const { name, avgRating, cuisines, cloudinaryImageId, costForTwo } = props.resData;
 
   return (

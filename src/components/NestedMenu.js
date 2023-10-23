@@ -1,11 +1,18 @@
 import { useContext, useState } from "react";
+import { useDispatch } from "react-redux";
 import CartContext from "../utils/CartContext";
+import { addItem } from "../utils/cartSlice";
 import { CDN_URL_CATEGORIES } from "../utils/constants";
 
 const NestedMenu = ({ data }) => {
   const { name, imageId, description } = data;
   const [cartValue, setCartValue] = useState(0);
   const [contextCartValue, setContextCartValue] = useContext(CartContext);
+
+  const dispatch = useDispatch();
+  const handleClick = (data) => {
+    dispatch(addItem(data));
+  }
 
   return (
     <div className="sub-menu-category">
@@ -25,6 +32,7 @@ const NestedMenu = ({ data }) => {
         onClick={() => {
           setCartValue(cartValue + 1);
           setContextCartValue(contextCartValue + 1);
+          handleClick(data);
         }}
       >
         ➕

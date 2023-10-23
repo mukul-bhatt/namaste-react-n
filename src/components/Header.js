@@ -4,6 +4,7 @@ import companyLogo from "../../app-logo.png";
 import CartContext from "../utils/CartContext";
 import ThemeContext from "../utils/ThemeContext";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import {useSelector} from "react-redux";
 
 
 
@@ -11,7 +12,10 @@ const Header = () => {
   const [btnName, setbtnName] = useState("Login");
 
   const [newTheme, setNewTheme] = useContext(ThemeContext);
-  const [cartValue] = useContext(CartContext);
+  // const [cartValue] = useContext(CartContext);
+
+  // Subscribing to the store using a selector
+  const cartItems = useSelector((store)=>store.cart.items);
 
   const status = useOnlineStatus();
   
@@ -48,7 +52,7 @@ const Header = () => {
             <Link to="/grocery">Grocery</Link>
           </li>
           <li>
-              Cart-{cartValue}
+          <Link to="/cart">Cart-{cartItems.length}</Link>
           </li>
         </ul>
       </div>
